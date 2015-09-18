@@ -8,8 +8,6 @@ $ gulp validate-xml
 
 ## Remarks
 
-This project uses the [xsd-schema-validator](https://github.com/nikku/node-xsd-schema-validator) package which requires Java. More information about the setup required to run the package is available on the project's Git repo page.
-
 This sample is based on the Office Add-in manifest and its XSD as published on https://msdn.microsoft.com/en-us/library/fp123711. The XSD had to be modified on line 249 from:
 
 ```xml

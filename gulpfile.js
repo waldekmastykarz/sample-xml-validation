@@ -1,34 +1,34 @@
 'use strict';
 
 var gulp = require('gulp'),
-    chalk = require('chalk'),
-    fs = require('fs'),
-    xsd = require('libxml-xsd');
-    
-gulp.task('validate-xml1', function() {
-  xsd.parseFile('./manifest.xsd', function(err, schema) {
-    console.log('--schema parsed');
-    schema.validateFile('./manifest-invalid-attribute-value.xml', function(err, validationErrors) {
-      console.log(err);
-      console.log(validationErrors);
-    });
-  });
-});
+  chalk = require('chalk'),
+  fs = require('fs'),
+  xmllint = require('xmllint');
 
 gulp.task('validate-xml', function () {
-  xsd.parseFile('./manifest.xsd', function(err, schema) {
-    gulp.src('./*.xml')
-      .pipe(validateXml(schema));
-  });
+  var xsd = fs.readFileSync('./manifest.xsd');
+  gulp.src('./*.xml')
+    .pipe(validateXml(xsd));
 });
 
-function validateXml(schema) {
+function validateXml(xsd) {
   function doValidate(file, cb) {
-    schema.validate(file.contents, function(err, validationErrors) {
-      console.log('Validation results for ' + chalk.blue(file.path.substring(file.path.lastIndexOf('/')+1)) + ':');
-      console.log(err);
-      console.log(validationErrors);
+    console.log('\nValidating ' + chalk.blue(file.path.substring(file.path.lastIndexOf('/')+1)) + ':');
+    
+    var result = xmllint.validateXML({
+      xml: file.contents,
+      schema: xsd
     });
+    
+    if (result.errors === null) {
+      console.log(chalk.green('Valid'));
+    }
+    else {
+      console.log(chalk.red('Invalid'));
+      result.errors.forEach(function(e) {
+        console.log(chalk.red(e));
+      });
+    }
   }
 
   return require('event-stream').map(doValidate);

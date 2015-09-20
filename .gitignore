@@ -3,3 +3,5 @@
 
 # package files
 **/node_modules
+
+coverage/

@@ -3,7 +3,19 @@
 Sample project showing how to validate XML files using an XSD schema. The different XML files in the project represent the different test scenarios. Run using:
 
 ```
-$ gulp validate-xml
+$ gulp validate-xml --xmlfile ./path/to/manifest.xml
+```
+
+If you need to process the validation output you can have the task provide the output as JSON:
+
+```
+$ gulp validate-xml --xmlfile ./path/to/manifest.xml --json
+```
+
+The sample project contains a test suite to validate the correct working of the XML validation process. Run using:
+
+```
+$ gulp test
 ```
 
 ## Remarks

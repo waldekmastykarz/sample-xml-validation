@@ -20,7 +20,7 @@ $ gulp test
 
 ## Remarks
 
-This sample is based on the Office Add-in manifest and its XSD as published on https://msdn.microsoft.com/en-us/library/fp123711. The XSD had to be modified on line 249 from:
+This sample is based on the Office Add-in manifest and its XSD as published on https://msdn.microsoft.com/library/fp123711?WT.mc_id=m365-0000-wmastyka. The XSD had to be modified on line 249 from:
 
 ```xml
 <xs:pattern value="([0-9]{1,5})(\.[0-9]{1,5}){0,3}?"/>
